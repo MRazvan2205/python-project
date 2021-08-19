@@ -1,0 +1,53 @@
+{% extends 'articlesIndex.html' %}
+
+{% block content %}
+    <div class="h-screen flex flex-col items-center justify-center">
+        <div class="text-5xl font-light text-center mb-10">
+            Create Article
+        </div>
+
+        <form method="POST" class="bg-white max-w-md w-full rounded-md shadow-md px-6 py-4">
+            {% csrf_token %}
+
+            <div class="flex flex-col">
+                <div>
+                    <label for="id_title"
+                           class="text-gray-700 text-sm font-medium"
+                    >
+                        Title
+                    </label>
+
+                    <input id="id_title"
+                           name="title"
+                           type="text"
+                           placeholder="Title"
+                           class="border border-gray-300 focus:border-indigo-300 rounded-md shadow-sm block mt-2 py-2 px-4 w-full"
+                           required
+                    >
+                </div>
+
+                <div class="my-4">
+                    <label for="id_content"
+                           class="text-gray-700 text-sm font-medium"
+                    >
+                        Content
+                    </label>
+
+                    <textarea id="id_content"
+                              name="content"
+                              placeholder="Content"
+                              class="border border-gray-300 focus:border-indigo-300 rounded-md shadow-sm block mt-2 py-2 px-4 w-full"
+                              required
+                    ></textarea>
+                </div>
+
+                <input type="hidden" id="created_by" name="created_by" value="{{ user.id }}">
+
+                <button class="bg-blue-600 text-white text-sm font-medium rounded-md py-3">
+                    Create
+                </button>
+            </div>
+
+        </form>
+    </div>
+{% endblock %}

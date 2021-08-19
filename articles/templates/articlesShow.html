@@ -1,0 +1,59 @@
+{% extends 'articlesIndex.html' %}
+
+{% block content %}
+    <div class="flex justify-between items-center px-12 bg-gray-700 py-3 text-white">
+        <div class="text-3xl">
+            {{ article.title }}
+        </div>
+
+        {% if article.created_by == user.id %}
+            <div class="flex space-x-6">
+                <a href="{% url 'delete' article.id %}"
+                   class="bg-red-600 py-2 px-6 rounded font-medium"
+                >
+                    Delete
+                </a>
+
+                <a href="{% url 'edit' article.id %}"
+                   class="bg-green-600 py-2 px-6 rounded font-medium"
+                >
+                    Edit
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="bg-white border border-gray-200 mt-10 mx-12 rounded p-5 text-gray-600">
+        <div>{{ article.content }}</div>
+    </div>
+
+    <div class="flex justify-between items-center mx-12 mt-10 mb-4">
+        <div class="text-3xl">
+            Comments
+        </div>
+
+        <a href=""
+           class="bg-blue-600 text-white py-3 px-20 rounded font-medium"
+        >
+            Add
+        </a>
+    </div>
+
+    <div class="mx-12">
+        <textarea id="id_content"
+                  name="content"
+                  placeholder="Comment..."
+                  class="border border-gray-200 focus:border-indigo-300 rounded-md shadow-sm block mt-2 py-2 px-4 w-full"
+                  required
+        ></textarea>
+    </div>
+
+    <div class="grid grid-cols-2 gap-6 mt-4 mx-12">
+        {% for comment in comments %}
+            <div class="bg-white px-6 py-4 rounded border-gray-200">
+                {{ comment.content }}
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
